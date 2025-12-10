@@ -1,0 +1,209 @@
+<html>
+<head>
+    <style type="text/css">
+      html, body, #mapdiv{
+          width: 100%;
+          height: 500px;
+      }
+    </style>
+</head>
+<body>
+  <input type="file" id="csv" onchange="myFunction(this.files)" accept=".csv"><br>
+  <label for="">OD</label>
+  <input type="text" id="from" name="from" value="1"><br>
+  <label for="lname">DO</label>
+  <input type="text" id="to" name="to" value="100"><br>
+  <button onclick="addr_search()">Pobierz</button>
+  <label>LON</label>
+  <textarea id="lon"></textarea>
+  <label for="lat">LAT</label>
+  <textarea id="lat"></textarea><br> 
+  <div id="mapdiv"></div>
+  <script src="jquery-1.8.2.min.js"></script>
+  <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+  <script>
+  
+	map = new OpenLayers.Map("mapdiv");
+    map.addLayer(new OpenLayers.Layer.OSM());
+	
+    epsg4326 =  new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
+    projectTo = map.getProjectionObject(); //The map projection (Spherical Mercator)
+	
+    var lonLat = new OpenLayers.LonLat( 19.10771,52.12101 ).transform( epsg4326, projectTo);
+                
+    var zoom=6;
+	map.setCenter (lonLat, zoom);
+
+	var controls;
+    var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
+	map.addLayer(vectorLayer);
+	function createPopup(feature) {
+		feature.popup = new OpenLayers.Popup.FramedCloud("pop",
+        feature.geometry.getBounds().getCenterLonLat(),
+        null,
+        '<div class="markerContent">'+feature.attributes.description+'</div>',
+        null,
+        true,
+        function() { controls['selector'].unselectAll(); }
+     );
+     //feature.popup.closeOnMove = true;
+     map.addPopup(feature.popup);
+   }
+   function destroyPopup(feature) {
+     feature.popup.destroy();
+     feature.popup = null;
+   }
+
+   var schools = [];
+   var lonlist = [];
+   var latlist = [];
+   
+   	$.ajaxSetup({ //synchroniczne wykonanie zapytań
+	async: false
+	});
+	
+	
+   function myFunction(files) {  //to samo co w pliku map.js
+      if (window.FileReader) {
+          getAsText(files[0]);
+      } else {
+          alert('FileReader nie jest obsługiwany.');
+      }
+    }
+ 
+    function getAsText(fileToRead) { //to samo co w pliku map.js
+        var reader = new FileReader();
+        reader.readAsText(fileToRead);
+        reader.onload = loadHandler;
+        reader.onerror = errorHandler;
+    }
+ 
+    function loadHandler(event) { //to samo co w pliku map.js
+        var csv = event.target.result;
+		schools = processData(csv);
+		//addr_search();
+	}
+ 
+    function processData(csv) { //to samo co w pliku map.js
+        var allTextLines = csv.split(/\r\n|\n/);
+        var lines = [];
+        for (var i=0; i<allTextLines.length; i++) {
+            var data = allTextLines[i].split(';');
+                var tarr = [];
+                for (var j=0; j<data.length; j++) {
+                    tarr.push(data[j]);
+                }
+                lines.push(tarr);
+        }
+        return lines;
+    }
+ 
+    function errorHandler(evt) { //to samo co w pliku map.js
+        if(evt.target.error.name == "NotReadableError") {
+            alert("Nie można odczytać pliku.");
+        }}
+
+	function addr_search() { //funkcja wyszukująca koordynaty
+		if(schools!=null)
+		{
+			var feature;
+			var from = document.getElementById("from").value;
+			var to = document.getElementById("to").value;
+			//lonlist = [];
+			//latlist = [];
+			for (var i=1; i<schools.length; i++)
+			{			
+				var info = [];  //tablica wykorzystana przy zapytaniu
+				var info2 = []; // tablica służaca do porówanania czy została znalezio
+				
+				info.push("Polska");
+				//info.push(schools[i][6]);  //powiat
+				//info.push(schools[i][7]);  //gmina
+				info.push(schools[i][18]);	//kod
+				info.push(schools[i][9]);  //miasto
+				if(schools[i][9]!=schools[i][16])
+				{
+					info.push(schools[i][16]);//ulica, przypadek kiedy miasto i ulica jest tym samym powoduje utworzenie złego zapytania 
+				} 			
+				info.push(schools[i][17]); //nr	
+				
+				info2.push(schools[i][0]); //id
+				info2.push(schools[i][6]);  //powiat
+				info2.push(schools[i][7]);  //gmina
+				info2.push(schools[i][9]);  //miasto
+				info2.push(schools[i][16]); //ulica			
+				info2.push(schools[i][17]); //nr
+				info2.push(schools[i][18]);	//kod				
+				
+				if(i>=from&&i<=to){							//pierwsze zapytanie: kraj,kod pocztowy,miasto,ulica,nr
+					$.getJSON('http://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + info, function(data) {
+					//$.getJSON('https://nominatim.openstreetmap.org/search?country=Poland&street='+schools[i][17]+' '+schools[i][16]+/*'&city='+schools[i][9]+*/'&state='+schools[i][5]+'&postalcode='+schools[i][18]+'&format=json&limit=1', function(data) {
+						$.each(data, function(key, val) {
+							//lonlist.push(val.lon);
+							//latlist.push(val.lat);
+							lonlist[i-1]=val.lon;
+							latlist[i-1]=val.lat;
+								feature = new OpenLayers.Feature.Vector(
+								new OpenLayers.Geometry.Point( val.lon,val.lat ).transform(epsg4326, projectTo),
+									{description:info+'<br>'+info2+'<br>'+val.display_name}, //po kliknieciu w znacznik mozna porownac czy znalezione miejsce odpowiada danym z pliku csv
+									{externalGraphic: 'marker-icon.png', graphicHeight: 41, graphicWidth: 25, graphicXOffset:-12, graphicYOffset:-25  }
+								);    
+								vectorLayer.addFeatures(feature);						
+						});	
+				
+					});
+							if(lonlist[i-1]==null) //jesli poprzednie zapytanie nic nie znalazlo,  drugie zapytanie kraj,powiat,miasto,ulica,nr
+							{
+								info[1]=schools[i][6]//powiat; dla niektórych szkół zmiana kodu pocztowego na powiat w zapytaniu powodowała zwrocenie poprawnych wartosci,
+								$.getJSON('http://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + info, function(data) { //w duzej ilosci przypadkow uzycie kodu i powiatu nie zwracało nic
+									$.each(data, function(key, val) {																	//dlatego nie użyłem dwoch wartosci razem
+										lonlist[i-1]=val.lon;
+										latlist[i-1]=val.lat;
+										feature = new OpenLayers.Feature.Vector(
+										new OpenLayers.Geometry.Point( val.lon,val.lat ).transform(epsg4326, projectTo),
+											{description:info+'<br>'+info2+'<br>'+val.display_name},
+											{externalGraphic: 'marker-icon.png', graphicHeight: 41, graphicWidth: 25, graphicXOffset:-12, graphicYOffset:-25  }
+										);    
+										vectorLayer.addFeatures(feature);										
+									});
+								});
+							}
+							if(lonlist[i-1]==null) //jesli poprzednie zapytanie nic nie znalazlo,  trzecie zapytanie kraj,miasto,ulica,nr
+							{
+								info[1]=null; // jak wyzej,usuniecie tej wartosci z zapytania dawało dobry wynik
+								$.getJSON('http://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + info, function(data) {
+									$.each(data, function(key, val) {
+										lonlist[i-1]=val.lon;
+										latlist[i-1]=val.lat;
+										feature = new OpenLayers.Feature.Vector(
+										new OpenLayers.Geometry.Point( val.lon,val.lat ).transform(epsg4326, projectTo),
+											{description:info+'<br>'+info2+'<br>'+val.display_name},
+											{externalGraphic: 'marker-icon.png', graphicHeight: 41, graphicWidth: 25, graphicXOffset:-12, graphicYOffset:-25  }
+										);    
+										vectorLayer.addFeatures(feature);										
+									});
+								});
+							}
+				}
+
+			}
+			controls = 
+			{
+				selector: new OpenLayers.Control.SelectFeature(vectorLayer, { onSelect: createPopup, onUnselect: destroyPopup })
+			};
+			map.addControl(controls['selector']);
+			controls['selector'].activate();
+			printval();	
+		}
+		
+		function printval()
+		{
+			document.getElementById("lon").value = lonlist.join("\n");
+			document.getElementById("lat").value = latlist.join("\n");	
+		}
+	}
+	
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1511344147 source:c:\users\student\documents\codeblocks projects\napisy\napisy.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1511734743 source:h:\progamiki\napisy\napisy.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1511987615 source:c:\users\panasiuk\desktop\napisy\napisy.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

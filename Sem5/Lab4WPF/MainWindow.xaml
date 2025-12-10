@@ -1,0 +1,44 @@
+﻿<Window x:Class="WPFLab4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFLab4"
+        mc:Ignorable="d"
+        Title="WPFLab4" Height="368.654" Width="452.917">
+    <Window.Resources>
+        <SolidColorBrush x:Key = "deleteBrush">
+            Red
+        </SolidColorBrush>
+        <SolidColorBrush x:Key = "createBrush">
+            Lime
+        </SolidColorBrush>
+    </Window.Resources>
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+
+        <ListBox x:Name="listBox" ItemsSource="{Binding People, Mode=TwoWay}" Margin="10,10,0,0" Width="250" Height="250" HorizontalAlignment="Left" VerticalAlignment="Top" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="Name"/>
+                                <Binding Path="Surname"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Button x:Name="BttnAdd" Content="Dodaj/Edytuj" HorizontalAlignment="Left" Margin="10,265,0,0" VerticalAlignment="Top" Width="125" Click="BttnAdd_Click" Background= "{StaticResource createBrush}"/>
+        <Button x:Name="BttnDel" Content="Usuń" HorizontalAlignment="Left" Margin="135,265,0,0" VerticalAlignment="Top" Width="125" Click="BttnDel_Click" Background= "{StaticResource deleteBrush}"/>
+
+        <Label x:Name="LabelName" Content="{Binding ElementName=listBox, Path=SelectedItem.Name }" HorizontalAlignment="Left" Margin="265,10,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label x:Name="LabelSurname" Content="{Binding ElementName=listBox, Path=SelectedItem.Surname }" HorizontalAlignment="Left" Margin="265,41,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label x:Name="LabelCity" Content="{Binding ElementName=listBox, Path=SelectedItem.City }" HorizontalAlignment="Left" Margin="265,72,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label x:Name="LabelYear" Content="{Binding ElementName=listBox, Path=SelectedItem.Year }" HorizontalAlignment="Left" Margin="265,103,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Image Source="{Binding  ElementName=listBox, Path=SelectedItem.Photo}" HorizontalAlignment="Left" Height="150" Margin="265,135,0,0" VerticalAlignment="Top" Width="150" />
+
+    </Grid>
+</Window>

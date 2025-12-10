@@ -1,0 +1,83 @@
+﻿<Window x:Class="WPFLab2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFLab2"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        mc:Ignorable="d"
+        Title="WPFLab2" Height="450" Width="800">
+        
+    <Grid ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition x:Name="Column1" Width="1*"  />
+            <ColumnDefinition x:Name="Column2" Width="2*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition x:Name="Column4" Width="200" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition x:Name="Row1" Height="1*" />
+            <RowDefinition x:Name="Row2" Height="2*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition x:Name="Row4" Height="200"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="ButtonLoadImag" Click="ButtonLoadImag_Click">Load Image</Button>
+        <WrapPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <WindowsFormsHost >
+                <wf:NumericUpDown x:Name="NumCol1" Value="1" Minimum="0.1" ValueChanged="NumCol1_ValueChanged"/>
+            </WindowsFormsHost>
+            <TextBox x:Name="TBoxCol1" IsReadOnly="True" FontSize="16" >1x</TextBox>
+        </WrapPanel>
+        <WrapPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <WindowsFormsHost >
+                <wf:NumericUpDown x:Name="NumCol2" Value="2" Minimum="0.1" ValueChanged="NumCol2_ValueChanged"/>
+            </WindowsFormsHost>
+            <TextBox x:Name="TBoxCol2" IsReadOnly="True" FontSize="16">2x</TextBox>
+        </WrapPanel>
+        <TextBox IsReadOnly="True" FontSize="16"  Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">Original</TextBox>
+        <WrapPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <WindowsFormsHost >
+                <wf:NumericUpDown x:Name="NumCol4" Minimum="1" Maximum="1000" Value="200" ValueChanged="NumCol4_ValueChanged"/>
+            </WindowsFormsHost>
+            <TextBox x:Name="TBoxCol4" IsReadOnly="True" FontSize="16">200 px</TextBox>
+        </WrapPanel>
+        <WrapPanel  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <WindowsFormsHost >
+                <wf:NumericUpDown x:Name="NumRow1" Value="1" Minimum="0.1" ValueChanged="NumRow1_ValueChanged" />
+            </WindowsFormsHost>
+            <TextBox x:Name="TBoxRow1" IsReadOnly="True" FontSize="16">1x</TextBox>
+        </WrapPanel>
+        <WrapPanel  Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <WindowsFormsHost >
+                <wf:NumericUpDown x:Name="NumRow2" Value="2" Minimum="0.1" ValueChanged="NumRow2_ValueChanged"/>
+            </WindowsFormsHost>
+            <TextBox x:Name="TBoxRow2" IsReadOnly="True" FontSize="16">2x</TextBox>
+        </WrapPanel>
+        <TextBox IsReadOnly="True" FontSize="16"  Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Original</TextBox>
+        <WrapPanel  Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <WindowsFormsHost >
+                <wf:NumericUpDown x:Name="NumRow4" Minimum="1" Maximum="1000" Value="200" ValueChanged="NumRow4_ValueChanged"/>
+            </WindowsFormsHost>
+            <TextBox x:Name="TBoxRow4" IsReadOnly="True" FontSize="16">200 px</TextBox>
+        </WrapPanel>
+        <Image x:Name="Img1" Grid.Row="1" Grid.Column="1"/>
+        <Image x:Name="Img2" Grid.Row="1" Grid.Column="2"></Image>
+        <Image x:Name="Img3" Grid.Row="1" Grid.Column="3"></Image>
+        <Image x:Name="Img4" Grid.Row="1" Grid.Column="4"></Image>
+        <Image x:Name="Img5" Grid.Row="2" Grid.Column="1"></Image>
+        <Image x:Name="Img6" Grid.Row="2" Grid.Column="2"/>
+        <Image x:Name="Img7" Grid.Row="2" Grid.Column="3"></Image>
+        <Image x:Name="Img8" Grid.Row="2" Grid.Column="4"></Image>
+        <Image x:Name="Img9" Grid.Row="3" Grid.Column="1"></Image>
+        <Image x:Name="Img10" Grid.Row="3" Grid.Column="2"></Image>
+        <Image x:Name="Img11" Grid.Row="3" Grid.Column="3"></Image>
+        <Image x:Name="Img12" Grid.Row="3" Grid.Column="4"></Image>
+        <Image x:Name="Img13" Grid.Row="4" Grid.Column="1"></Image>
+        <Image x:Name="Img14" Grid.Row="4" Grid.Column="2"></Image>
+        <Image x:Name="Img15" Grid.Row="4" Grid.Column="3"></Image>
+        <Image x:Name="Img16" Grid.Row="4" Grid.Column="4"></Image>
+    </Grid>
+
+</Window>

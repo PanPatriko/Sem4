@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1515452715 source:c:\users\panasiuk\desktop\progamiki\plikbinarny\binarny.c
+	<stdio.h>
+	<stdlib.h>
+
+1515794606 source:c:\users\panasiuk\desktop\progamiki\12-plikbinarny\binarny.c
+	<stdio.h>
+	<stdlib.h>
+

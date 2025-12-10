@@ -1,0 +1,73 @@
+﻿<Window x:Class="WPFLab3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFLab3"
+        mc:Ignorable="d"
+        Title="WPFLab3" Height="550" Width="800" HorizontalAlignment="Left" VerticalAlignment="Top">
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Top" >
+        <Grid VerticalAlignment="Top" Margin="0,120,10,0" HorizontalAlignment="Left">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Content="Button" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="76" Click="Layout_Click"/>
+            <Button Content="Button" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="76" Click="Layout_Click" Grid.Row="1" />
+            <Label Content="Layout"  HorizontalAlignment="Center"  VerticalAlignment="Center"  Grid.Row="2" MouseLeftButtonDown="Layout_Click" Background="#00000000" ></Label>
+            <Image  Source="C:\Users\pc\Desktop\a.jpg" HorizontalAlignment="Center"  VerticalAlignment="Center"  Grid.Row="3" MouseLeftButtonDown="Layout_Click" Stretch="Uniform"  ></Image>
+            <Button Content="Button" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="76" Click="Render_Click" Grid.Column="1"></Button> 
+            <Button Content="Button" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="76" Click="Render_Click" Grid.Row="1" Grid.Column="1"  />
+            <Label Content="Render"  HorizontalAlignment="Center"  VerticalAlignment="Center"  Grid.Row="2"  MouseLeftButtonDown="Render_Click" Grid.Column="1" ></Label>
+            <Image  Source="C:\Users\pc\Desktop\a.jpg" HorizontalAlignment="Center"  VerticalAlignment="Center"  Grid.Row="3"  MouseLeftButtonDown="Render_Click" Stretch="Uniform" Grid.Column="1"></Image>
+        </Grid>
+        <CheckBox x:Name="Scale" Content="ScaleTranform" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Rotate" Content="RotateTransform" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Skew" Content="SkewTransform" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Translate" Content="TranslateTransform" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Anim" Content="Animation" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top"/>
+        <Label Content="Size X" HorizontalAlignment="Left" Margin="130,4,0,0" VerticalAlignment="Top" MouseEnter="Label_MouseEnter">
+        </Label>
+        <TextBox x:Name="TextBoxSizeX" HorizontalAlignment="Left" Height="18" Margin="183,6,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="51"/>
+        <Label Content="Size Y" HorizontalAlignment="Left" Margin="239,4,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.22,0.962"/>
+        <TextBox x:Name="TextBoxSizeY" HorizontalAlignment="Left" Height="18" Margin="293,7,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="51"/>
+        <Label Content="Angle" HorizontalAlignment="Left" Margin="130,24,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.463,1.192"/>
+        <TextBox x:Name="TextBoxAngle" HorizontalAlignment="Left" Height="17" Margin="183,27,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="51"/>
+        <Label Content="AngleX" HorizontalAlignment="Left" Margin="130,44,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TextBoxAngleX" HorizontalAlignment="Left" Height="18" Margin="183,47,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="51"/>
+        <Label Content="AngleY" HorizontalAlignment="Left" Margin="239,44,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TextBoxAngleY" HorizontalAlignment="Left" Height="18" Margin="293,44,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="51"/>
+        <Label Content="OffsetX" HorizontalAlignment="Left" Margin="130,64,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TextBoxOffsetX" HorizontalAlignment="Left" Height="18" Margin="183,67,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="51"/>
+        <Label Content="OffsetY" HorizontalAlignment="Left" Margin="239,63,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TextBoxOffsetY" HorizontalAlignment="Left" Height="18" Margin="293,67,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="51"/>
+        <Slider x:Name="Slider" HorizontalAlignment="Left" Margin="467,50,0,0" VerticalAlignment="Top" Height="40" Width="200" Maximum="100">
+            <Slider.Triggers>
+                <EventTrigger RoutedEvent = "Slider.MouseDoubleClick">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard TargetName = "Slider">
+                                <DoubleAnimation  To = "50" AutoReverse="True" Storyboard.TargetProperty = "Width" Duration="0:0:5" />
+
+                                <DoubleAnimation  To = "50" Storyboard.TargetProperty = "Value" Duration="0:0:10" />
+                                <DoubleAnimation  To = "50" Storyboard.TargetProperty = "Margin" Duration="0:0:10" />
+
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                    
+                </EventTrigger>
+            </Slider.Triggers>
+        </Slider>
+        <CheckBox x:Name="AutoReverse" Content="AutoReverse" HorizontalAlignment="Left" Margin="90,90,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="CBRepeatBehavior" Content="RepeatBehavior" HorizontalAlignment="Left" Margin="183,90,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TextBoxTimeSpan" HorizontalAlignment="Left" Height="17" Margin="293,88,0,0" TextWrapping="Wrap" Text="0:0:5" VerticalAlignment="Top" Width="51"/>
+    </Grid>
+
+</Window>

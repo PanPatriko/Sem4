@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1513764474 source:c:\users\student\documents\codeblocks projects\kk\pliktekst\plik.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1514932407 source:c:\users\panasiuk\desktop\progamiki\pliktekst\plik.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1514932407 source:c:\users\panasiuk\desktop\progamiki\11-pliktekst\plik.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

@@ -1,0 +1,47 @@
+﻿<Window x:Class="WPFLab4.AddWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFLab4"
+        mc:Ignorable="d"
+        Title="Dodaj/Edytuj" Height="553.031" Width="414.766">
+    <Grid>
+        <ListBox x:Name="listBox" ItemsSource="{Binding People}"  Margin="10,10,0,0" Width="250" Height="250" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="Name"/>
+                                <Binding Path="Surname"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBox x:Name="TBoxName" Text="{Binding ElementName=listBox, Path=SelectedItem.Name }" HorizontalAlignment="Left" Height="23" Margin="10,333,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TBoxSurname"  Text="{Binding ElementName=listBox, Path=SelectedItem.Surname }" HorizontalAlignment="Left" Height="22" Margin="10,387,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TBoxCity"  Text="{Binding ElementName=listBox, Path=SelectedItem.City}" HorizontalAlignment="Left" Height="23" Margin="10,440,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TBoxYear"  Text="{Binding ElementName=listBox, Path=SelectedItem.Year }" HorizontalAlignment="Left" Height="23" Margin="10,489,0,-9" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="BttnAdd" Content="Dodaj" HorizontalAlignment="Left" Margin="265,262,0,0" VerticalAlignment="Top" Width="120" Click="BttnAdd_Click"/>
+        <Label Content="Rok urodzenia" HorizontalAlignment="Left" Margin="10,463,0,0" VerticalAlignment="Top"/>
+        <Label Content="Miasto" HorizontalAlignment="Left" Margin="10,414,0,0" VerticalAlignment="Top"/>
+        <Label Content="Imie" HorizontalAlignment="Left" Margin="10,307,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.788,-1.538"/>
+        <Label Content="Nazwisko" HorizontalAlignment="Left" Margin="10,356,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="BttnImage" Content="Wybierz obrazek" HorizontalAlignment="Left" Margin="135,489,0,0" VerticalAlignment="Top" Width="150" Click="BttnImage_Click" Height="23"/>
+        <Image  Source="{Binding  ElementName=listBox, Path=SelectedItem.Photo}" HorizontalAlignment="Left" Height="150" Margin="135,334,0,0" VerticalAlignment="Top" Width="150"/>
+        <TextBox x:Name="TBoxName_Copy"  HorizontalAlignment="Left" Height="23" Margin="265,78,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TBoxSurname_Copy"   HorizontalAlignment="Left" Height="22" Margin="265,132,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TBoxCity_Copy"   HorizontalAlignment="Left" Height="23" Margin="265,185,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TBoxYear_Copy"   HorizontalAlignment="Left" Height="23" Margin="265,234,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <Label Content="Rok urodzenia" HorizontalAlignment="Left" Margin="265,208,0,0" VerticalAlignment="Top"/>
+        <Label Content="Miasto" HorizontalAlignment="Left" Margin="265,159,0,0" VerticalAlignment="Top"/>
+        <Label Content="Edycja" HorizontalAlignment="Left" Margin="10,265,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Content="Dodawanie" HorizontalAlignment="Left" Margin="265,0,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Content="Imie" HorizontalAlignment="Left" Margin="265,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.788,-1.538"/>
+        <Label Content="Nazwisko" HorizontalAlignment="Left" Margin="265,106,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

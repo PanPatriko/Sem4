@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1518174441 source:c:\users\panasiuk\desktop\progamiki\projekt\projjekt\statki.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<conio.h>
+

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ThingworxLab4.MainPage">
+
+    <StackLayout>
+        <!-- Place new controls here -->
+        <Label Text="ThingworxLab4"></Label>
+        <Label x:Name="info" Text="Welcome to Xamarin.Forms!" 
+           HorizontalOptions="Center"
+           VerticalOptions="CenterAndExpand" />
+        <Label Text="Szerokość:"></Label>
+        <Label x:Name="latitude"></Label>
+        <Label Text="Długość:"></Label>
+        <Label x:Name="longitude"></Label>
+        <Button Text="Start" BackgroundColor="GreenYellow" Clicked="StartService"></Button>
+        <Button Text="Stop" BackgroundColor="Red" Clicked="StopService"></Button>
+
+    </StackLayout>
+
+</ContentPage>

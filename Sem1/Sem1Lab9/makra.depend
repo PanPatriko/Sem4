@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1514659258 source:c:\users\panasiuk\desktop\progamiki\makra\makra.c
+	<stdlib.h>
+	<stdio.h>
+	"plik.h"
+
+1514659294 c:\users\panasiuk\desktop\progamiki\makra\plik.h
+
+1514826127 source:c:\users\panasiuk\desktop\progamiki\9-makra\makra.c
+	<stdlib.h>
+	<stdio.h>
+	"plik.h"
+
+1515170311 c:\users\panasiuk\desktop\progamiki\9-makra\plik.h
+

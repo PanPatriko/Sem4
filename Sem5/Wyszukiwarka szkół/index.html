@@ -1,0 +1,99 @@
+<html>
+	<head>
+	  <script src="js/jquery-1.8.2.min.js"></script>
+	  <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+	  <link rel="stylesheet" type="text/css" href="site.css">
+	  
+	</head>
+	<body>
+	
+
+		<div id="search">
+			<input type="text" id="counter" readonly=true ></input><br>
+			<input type="text" name="addr" value="" id="addr" size="10"/>
+			<button type="button" onclick="filterSchools()">Szukaj</button>
+			<br>
+			<input type="file" id="csv" onchange="ReadCSV(this.files)" accept=".csv">>
+			<br>
+			<ol>
+				<li>Województwa
+					<ul>
+						<li>				    					
+						<label>Dolnośląskie</label>
+						<input type="checkbox" name="state" value="2" checked=true>						
+						</li>
+						<li>
+							<label>Kujawsko-Pomorskie</label>
+							<input type="checkbox" name="state" value="4" checked=true>						
+						</li>	
+						<li>
+							<label>Lubelskie</label>
+							<input type="checkbox" name="state" value="6" checked=true>						
+						</li> 
+						<li>
+							<label>Lubuskie</label>
+							<input type="checkbox" name="state" value="8" checked=true>						
+						</li>
+						<li>
+							<label>Łódzkie</label>
+							<input type="checkbox" name="state" value="10" checked=true>						
+						</li>		
+						<li>
+							<label>Małopolskie</label>
+							<input type="checkbox" name="state" value="12" checked=true>						
+						</li>		
+						<li>
+							<label>Mazowieckie</label>
+							<input type="checkbox" name="state" value="14" checked=true>						
+						</li>	
+						<li>
+							<label>Opolskie</label>
+							<input type="checkbox" name="state" value="16" checked=true>						
+						</li>		
+						<li>
+							<label>Podkarpackie</label>
+							<input type="checkbox" name="state" value="18" checked=true>						
+						</li>		
+						<li>
+							<label>Podlaskie</label>
+							<input type="checkbox" name="state" value="20" checked=true>						
+						</li>		
+						<li>
+							<label>Pomorskie</label>
+							<input type="checkbox" name="state" value="22" checked=true>						
+						</li>		
+						<li>
+							<label>Śląskie</label>
+							<input type="checkbox" name="state" value="24" checked=true>						
+						</li>		
+						<li>
+							<label>Świętokrzyskie</label>
+							<input type="checkbox" name="state" value="26" checked=true>						
+						</li>		
+						<li>
+							<label>Warmińsko-Mazurskie</label>
+							<input type="checkbox" name="state" value="28" checked=true>						
+						</li>		
+						<li>
+							<label>Wielkopolskie</label>
+							<input type="checkbox" name="state" value="30" checked=true>						
+						</li>		
+						<li>
+							<label>Zachodniopomorskie</label>
+							<input type="checkbox" name="state" value="32" checked=true>						
+						</li>
+						<li>
+							<button type="button" onclick="selectAll()">Zaznacz wszystkie</button>						
+						</li>
+						<li>
+							<button type="button" onclick="unselectAll()">Odznacz wszystkie</button>						
+						</li>							
+					</ul>
+				</li>
+			</ol>
+		</div>
+
+		<div id="map"></div>
+		<script src="js/map.js"></script>
+	</body>
+</html>
